@@ -1,6 +1,6 @@
 # repl
 
-A small utility for inspecting binary log events.
+A small utility for inspecting MySQL/MariaDB binary log streams.
 
 ## Usage
 
