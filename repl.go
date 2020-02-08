@@ -14,7 +14,7 @@ import (
 
 var (
 	log        = logrus.New()
-	DBFlavor   = "mariadb"
+	DBFlavor   string
 	DBServerID uint
 	DBHost     string
 	DBPort     uint
@@ -30,6 +30,7 @@ func init() {
 	flag.StringVar(&DBUser, "user", "root", "")
 	flag.StringVar(&DBPassword, "password", "root", "")
 	flag.StringVar(&GTID, "gtid", "", "")
+	flag.StringVar(&DBFlavor, "flavor", "mariadb", "mariadb or mysql")
 	flag.Parse()
 }
 
@@ -55,7 +56,7 @@ func main() {
 		}
 	}
 
-	gtidSet, err := mysql.ParseGTIDSet(mysql.MariaDBFlavor, GTID)
+	gtidSet, err := mysql.ParseGTIDSet(DBFlavor, GTID)
 	if err != nil {
 		log.Errorf("failed to parse gtid set: %s", err)
 	}
